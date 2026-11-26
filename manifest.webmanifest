@@ -1,6 +1,6 @@
 {
- "name": "Nhà trọ Bùi Văn Hòa",
- "short_name": "Nhà trọ BVH",
+ "name": "Quản lý tiền trọ",
+ "short_name": "Tiền trọ",
  "start_url": "./",
  "scope": "./",
  "display": "standalone",
