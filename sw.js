@@ -1,6 +1,6 @@
-/* Service worker TienTro v5.29: chỉ lưu đệm các tệp của chính app (cùng nguồn).
+/* Service worker TienTro v5.30: chỉ lưu đệm các tệp của chính app (cùng nguồn).
    Không bao giờ chạm vào yêu cầu tới Google (đăng nhập, Drive) nên không lưu token hay dữ liệu cá nhân. */
-const CACHE = 'tientro-v5.29';
+const CACHE = 'tientro-v5.30';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
