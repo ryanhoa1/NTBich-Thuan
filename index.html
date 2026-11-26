@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-esitAvP6/uJeHNtZPVz6/LunVkTbwNY9/Cx+N9XzNxk=' 'sha256-uyu0oLcksO2Fl4LvkT9cfEGaE3XixYtOUDurCNhlKOY=' 'sha256-JBFlo55Wn1iE5pxdsNbOmVvamDK4xt1miMGivFEglpA=' 'sha256-50eT1zieI21CqhoF5yJkNo56cvQKBmQJfVneBJiA15s=' 'sha256-yVBhl8r4CaB1tt7h2g02+xnacVj/6KiOewyWxdhiPJk=' 'sha256-fknaaFiOJQ27i7oZDSyqirN4fMAoS9odiy+AXE33Qsk=' 'sha256-6H5VB5QyLldKH9oMFUmjxw2uWpPZETQXpCkBaDjquMs=' https://accounts.google.com/gsi/client; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com/gsi/style; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://www.googleapis.com https://accounts.google.com/gsi/; frame-src https://accounts.google.com/gsi/; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'sha256-esitAvP6/uJeHNtZPVz6/LunVkTbwNY9/Cx+N9XzNxk=' 'sha256-uyu0oLcksO2Fl4LvkT9cfEGaE3XixYtOUDurCNhlKOY=' 'sha256-RWUeaimKZGBz2E1cFqDtygGbo3tLPpsaWwhvEIQKjO0=' 'sha256-50eT1zieI21CqhoF5yJkNo56cvQKBmQJfVneBJiA15s=' 'sha256-yVBhl8r4CaB1tt7h2g02+xnacVj/6KiOewyWxdhiPJk=' 'sha256-fknaaFiOJQ27i7oZDSyqirN4fMAoS9odiy+AXE33Qsk=' 'sha256-6H5VB5QyLldKH9oMFUmjxw2uWpPZETQXpCkBaDjquMs=' https://accounts.google.com/gsi/client; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com/gsi/style; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://www.googleapis.com https://accounts.google.com/gsi/; frame-src https://accounts.google.com/gsi/; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'">
 <meta name="referrer" content="no-referrer">
 <script>try{if(top!==self)top.location=self.location}catch(e){document.documentElement.style.display="none"}</script>
 <title>Quản Lý Tiền Trọ</title>
@@ -812,7 +812,7 @@ function renderChrome(){
   const cur=NAV.find(n=>n.id===UI.view);
   $('#side').innerHTML=`<div class="brand"><div class="logo" style="background:none"><svg viewBox="0 0 240 240" width="34" height="34" aria-hidden="true"><rect width="240" height="240" rx="52" fill="#0a6c5a"/><path d="M32 112L120 36l88 76" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/><path d="M58 100v96h124v-96" fill="none" stroke="#fff" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/><rect x="102" y="140" width="36" height="56" rx="6" fill="#f2b84b"/></svg></div><div><b>${esc(DB.settings.propertyName||'Nhà trọ')}</b><span>Quản lý tiền trọ</span>${DB.settings.address?`<span style="display:block;font-size:10.5px;line-height:1.3;margin-top:2px">${esc(DB.settings.address)}</span>`:''}</div></div>`+
     NAV.map(n=>`<button class="nav" data-act="nav" data-v="${esc(n.id)}" ${n.id===UI.view?'aria-current="page"':''}>${icon(n.icon)}${n.label}</button>`).join('')+
-    `<div class="side-foot"><div class="syncslot">${syncChip()}</div><p>Mọi thay đổi tự lưu. Dữ liệu nằm trong tệp JSON của riêng bạn.</p><p style="opacity:.7">Phiên bản v5.30 · Đăng nhập Google, lưu trên Google Drive</p><p style="opacity:.7;word-break:break-all;margin-top:2px">${esc((getAccount()||{}).email||'')}</p><button class="btn sm" data-act="logout" style="margin-top:8px">Đăng xuất</button></div>`;
+    `<div class="side-foot"><div class="syncslot">${syncChip()}</div><p>Mọi thay đổi tự lưu. Dữ liệu nằm trong tệp JSON của riêng bạn.</p><p style="opacity:.7">Phiên bản v5.29 · Đăng nhập Google, lưu trên Google Drive</p><p style="opacity:.7;word-break:break-all;margin-top:2px">${esc((getAccount()||{}).email||'')}</p><button class="btn sm" data-act="logout" style="margin-top:8px">Đăng xuất</button></div>`;
   $('#tabbar').innerHTML=TAB_IDS.map(id=>{const n=NAV.find(x=>x.id===id);return `<button data-act="nav" data-v="${esc(id)}" ${id===UI.view?'aria-current="page"':''}>${icon(n.icon)}${n.label}</button>`}).join('')+
     `<button data-act="menu">${icon('menu')}Thêm</button>`;
   const ks=monthKeys(),k=UI.month,i=ks.indexOf(k),m=DB.months[k],showM=!['settings','leave','tax','docs'].includes(UI.view);
@@ -1365,92 +1365,14 @@ function pplSummary(d){const n=d.all.filter(d.bad).length,nn=d.all.filter(x=>x.t
 function vPeople(){
   const d=pplData(),{f,so,list}=d,nDup=findDupGroups().length;
   return `<div class="tools"><span class="muted grow" id="pplSum">${pplSummary(d)}</span>
-    <button class="btn primary" data-act="personadd" data-room="">${icon('plus',16)}Thêm người ở</button><button class="btn" data-act="peopleimport">${icon('down',16)}Nhập từ Excel</button><button class="btn${nDup?' primary':' ghost'}" data-act="peopledup" title="Tìm và gộp người bị nhập trùng trong cùng phòng">Gộp người trùng${nDup?` (${nDup})`:''}</button><button class="btn ghost" data-act="peopletpl" title="Tải file Excel mẫu đúng định dạng">File mẫu</button><button class="btn" data-act="policerep" title="Xuất danh sách để gửi công an (Excel hoặc in PDF)">${icon('down',16)}Báo cáo công an</button><input type="file" id="filePeople" accept=".xlsx,.xls" hidden></div>
+    <button class="btn" data-act="peopleimport">${icon('down',16)}Nhập từ Excel</button><button class="btn${nDup?' primary':' ghost'}" data-act="peopledup" title="Tìm và gộp người bị nhập trùng trong cùng phòng">Gộp người trùng${nDup?` (${nDup})`:''}</button><button class="btn ghost" data-act="peopletpl" title="Tải file Excel mẫu đúng định dạng">File mẫu</button><button class="btn primary" data-act="policerep" title="Xuất danh sách để gửi công an (Excel hoặc in PDF)">${icon('down',16)}Báo cáo công an</button><input type="file" id="filePeople" accept=".xlsx,.xls" hidden></div>
   <div class="tools ppl-bar"><input type="search" id="pplQ" placeholder="Tìm phòng, tên, CCCD, số điện thoại" value="${esc(UI.peopleQ||'')}" aria-label="Tìm người ở" class="grow">
     <select data-change="peoplesort" aria-label="Sắp xếp" style="width:auto"><option value="room" ${so==='room'?'selected':''}>Xếp theo phòng</option><option value="expiry" ${so==='expiry'?'selected':''}>Hết hạn trước</option></select>
     <div class="seg" role="group" aria-label="Lọc">${[['all','Tất cả'],['alert','Cần chú ý'],['none','Chưa có hạn tạm trú']].map(([v,l])=>`<button data-act="rfilter" data-v="${esc(v)}" aria-pressed="${f===v}">${l}</button>`).join('')}</div></div>
   <div class="ppl-m" id="pplMob">${pplMobHTML(list,so==='room')}</div>
   <div class="tw fit ppl"><table><thead><tr><th class="l">Phòng</th><th class="l">Họ và tên</th><th>CMND/CCCD</th><th>Ngày thuê</th><th>Tiền cọc</th><th>Tạm trú (từ → đến)</th><th class="l">Tình trạng</th><th>Tạm vắng (từ → đến)</th><th class="l">Tình trạng</th><th></th></tr></thead>
   <tbody id="pplRows">${pplRowsHTML(list)}</tbody></table></div>
-  <p class="muted sm" style="margin:0">Bấm <b>+ Thêm người ở</b> để thêm nhanh khách thuê mới (hoặc tự tạo phòng mới nếu phòng chưa có). Người đứng tên thuê là <b>đại diện phòng</b>, ngày thuê và tiền cọc tính theo đại diện.</p>`;
-}
-function personAddModal(defaultRoomId){
-  const roomOpts=DB.rooms.map(r=>`<option value="${esc(r.id)}">${esc(r.id)}${r.status==='occupied'&&r.tenant&&r.tenant.name?' – '+esc(r.tenant.name):' (Trống)'}</option>`).join('');
-  openModal('Thêm người thuê / người ở trọ',`
-    <div class="fg">
-      <label class="f">Số phòng (chọn hoặc gõ mã mới, vd: P1)<input id="apRoom" type="text" list="apRoomList" value="${esc(defaultRoomId||'')}" placeholder="vd: P1, P2, KIOT1"><datalist id="apRoomList">${roomOpts}</datalist></label>
-      <label class="f">Vai trò trong phòng<select id="apRole">
-        <option value="auto">Tự động (đại diện nếu phòng trống, ở cùng nếu đã có khách)</option>
-        <option value="rep">Đại diện phòng (người đứng tên thuê chính)</option>
-        <option value="mem">Người ở cùng phòng</option>
-      </select></label>
-      <label class="f">Họ và tên *<input id="apName" type="text" placeholder="NGUYỄN VĂN A"></label>
-      <label class="f">Số CMND / CCCD<input id="apId" type="text" inputmode="numeric" placeholder="012345678901"></label>
-      <label class="f">Số điện thoại<input id="apPhone" type="text" inputmode="tel" placeholder="09xxxxxxxx"></label>
-      <label class="f">Ngày sinh<input id="apDob" type="date"></label>
-      <label class="f">Giới tính<select id="apSex"><option value="">— Chọn —</option><option value="Nam">Nam</option><option value="Nữ">Nữ</option></select></label>
-      <label class="f">Ngày thuê / dọn vào<input id="apMoveIn" type="date" value="${todayISO()}"></label>
-      <label class="f">Tiền cọc (nếu là đại diện)<input id="apDep" type="text" inputmode="numeric" class="numin" data-money="1" placeholder="0"></label>
-      <label class="f">Nhóm / hộ ở trọ<input id="apGrp" type="text" placeholder="Tên chủ hộ ở trọ"></label>
-      <label class="f">Tạm trú từ ngày<input id="apTt1" type="date"></label>
-      <label class="f">Tạm trú đến (hạn)<input id="apTt2" type="date"></label>
-      <label class="f full">Thường trú (HKTT)<input id="apHk" type="text" placeholder="Xã/Phường, Tỉnh/Thành phố"></label>
-      <label class="f">Chủ hộ (HKTT)<input id="apHko" type="text"></label>
-      <label class="f">Nơi đăng ký tạm trú<input id="apTpl" type="text" value="${esc(DB.settings.address?'Nhà trọ - '+DB.settings.address:'')}"></label>
-      <label class="f full">Ghi chú<input id="apNote" type="text" placeholder="Biển số xe, lưu ý..."></label>
-    </div>
-    <p class="muted sm" style="margin:6px 0 0">Nếu số phòng chưa tồn tại trên hệ thống, ứng dụng sẽ tự động tạo phòng mới ở trạng thái <b>Đang thuê</b>.</p>`,
-    `<button class="btn" data-act="mclose">Hủy</button><button class="btn primary" id="apSave">${icon('check',16)}Lưu người ở</button>`,{wide:true});
-  $('#apSave').onclick=()=>{
-    const rawRoom=($('#apRoom').value||'').trim();
-    const name=($('#apName').value||'').trim();
-    if(!rawRoom)return toast('Hãy nhập hoặc chọn số phòng','bad');
-    if(!name)return toast('Hãy nhập họ và tên người ở','bad');
-    const rid=importRoomId(rawRoom);
-    let r=roomById(rid);
-    const isNewRoom=!r;
-    if(!r){
-      const isKiot=/^KIOT/i.test(rid);
-      r={id:rid,type:isKiot?'kiot':'phong',rentMode:'formula',base:1100000,fixed:0,trash:DB.settings.trash||0,internet:0,cable:0,anqp:DB.settings.anqp||0,occupants:1,status:'occupied',tenant:{name:'',phone:'',idNo:'',moveIn:todayISO(),deposit:0,note:''},members:[]};
-      DB.rooms.push(r);
-    }
-    const role=$('#apRole').value;
-    const pObj={
-      name:toTitle(name),
-      idNo:idStr($('#apId').value),
-      phone:($('#apPhone').value||'').trim(),
-      dob:$('#apDob').value||'',
-      sex:$('#apSex').value||'',
-      tt1:$('#apTt1').value||'',
-      tt2:$('#apTt2').value||'',
-      tv1:'',tv2:'',
-      hk:($('#apHk').value||'').trim(),
-      hkOwner:toTitle($('#apHko').value),
-      group:toTitle($('#apGrp').value),
-      ttPlace:($('#apTpl').value||'').trim(),
-      note:($('#apNote').value||'').trim()
-    };
-    const moveIn=$('#apMoveIn').value||todayISO();
-    const dep=parseInt0($('#apDep').value)||0;
-    const hasRep=r.status==='occupied'&&r.tenant&&String(r.tenant.name||'').trim()!=='';
-    const asRep=(role==='rep')||(role==='auto'&&!hasRep);
-    r.status='occupied';
-    r.members=r.members||[];
-    if(asRep){
-      if(hasRep){
-        // Chuyển đại diện cũ xuống danh sách ở cùng để không mất dữ liệu
-        const old=r.tenant;
-        r.members.unshift({name:old.name||'',idNo:old.idNo||'',tt1:old.tt1||'',tt2:old.tt2||'',tv1:old.tv1||'',tv2:old.tv2||'',dob:old.dob||'',sex:old.sex||'',hk:old.hk||'',hkOwner:old.hkOwner||'',group:old.group||'',ttPlace:old.ttPlace||'',phone:old.phone||'',note:old.note||''});
-      }
-      r.tenant=Object.assign({},r.tenant,pObj,{moveIn,deposit:dep||r.tenant.deposit||0});
-    }else{
-      r.members.push(pObj);
-    }
-    const actualCount=(r.tenant&&r.tenant.name?1:0)+r.members.length;
-    if(actualCount>(r.occupants||0))r.occupants=actualCount;
-    sortRooms();syncRecs(UI.month);save();closeModal(true);render();
-    toast(`Đã thêm ${pObj.name} vào phòng ${rid}${isNewRoom?' (tự tạo phòng mới)':''}`);
-  };
+  <p class="muted sm" style="margin:0">Người đứng tên thuê là <b>đại diện phòng</b>, ngày thuê và tiền cọc tính theo đại diện. Thêm hoặc sửa người ở cùng phòng ở nút sửa (bút chì) hoặc mục Phòng &amp; khách. Khác với khoản “Tiền giấy tạm trú” (phí thu hằng tháng).</p>`;
 }
 const memRowHTML=m=>`<div class="memrow"><label class="f">Họ và tên<input type="text" class="m-name" value="${esc(m.name||'')}"></label><label class="f">CMND/CCCD<input type="text" class="m-id" value="${esc(m.idNo||'')}"></label>
   <label class="f">Tạm trú từ<input type="date" class="m-tt1" value="${esc(m.tt1||'')}"></label><label class="f">Tạm trú đến (hạn)<input type="date" class="m-tt2" value="${esc(m.tt2||'')}"></label>
@@ -1467,33 +1389,10 @@ function roomResLine(r){
 /* ---------- Nhập danh sách người ở từ Excel ---------- */
 const normTxt=t=>noAccent(String(t||'')).toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
 const toTitle=t=>String(t||'').trim().toLowerCase().replace(/(^|\s)(\S)/g,(m,a,b)=>a+b.toUpperCase());
-function importRoomId(v){
-  const raw=String(v||'').trim().toUpperCase().replace(/\s+/g,' ');
-  if(!raw)return '';
-  // 1. Nếu mã phòng khớp trực tiếp trong app (vd: "P1" hoặc "1 H") thì giữ nguyên
-  if(typeof DB!=='undefined'&&DB&&Array.isArray(DB.rooms)){
-    const direct=DB.rooms.find(r=>String(r.id).toUpperCase()===raw);
-    if(direct)return direct.id;
-    const t=normTxt(v);
-    let m;
-    if(m=/^(?:p|phong)?\s*0*(\d+)\s*(h?)$/.exec(t)){
-      const num=m[1],suf=m[2];
-      const cands=suf?[num+' H','P'+num]:['P'+num,num+' H',num];
-      const hit=DB.rooms.find(r=>cands.includes(String(r.id).toUpperCase()));
-      if(hit)return hit.id;
-      return suf?(num+' H'):('P'+num);
-    }
-    if(m=/^kiot\s*0*(\d+)$/.exec(t)){
-      const k1='KIOT'+m[1],k2='KIOT '+m[1];
-      const hit=DB.rooms.find(r=>[k1,k2].includes(String(r.id).toUpperCase()));
-      return hit?hit.id:k1;
-    }
-  }
-  const t=normTxt(v);let m;
-  if(m=/^(?:p|phong)?\s*0*(\d+)\s*(h?)$/.exec(t))return m[2]?(m[1]+' H'):('P'+m[1]);
+function importRoomId(v){const t=normTxt(v);let m;
+  if(m=/^(?:p|phong)?\s*0*(\d+)\s*h?$/.exec(t))return m[1]+' H';
   if(m=/^kiot\s*0*(\d+)$/.exec(t))return 'KIOT'+m[1];
-  return raw;
-}
+  return String(v||'').trim().toUpperCase().replace(/\s+/g,' ')}
 function anyDate(v){
   if(v==null||v==='')return '';
   if(v instanceof Date&&!isNaN(v))return `${v.getFullYear()}-${pad(v.getMonth()+1)}-${pad(v.getDate())}`;
@@ -1525,22 +1424,17 @@ async function parsePeopleXLSX(file){
   throw new Error('Không tìm thấy bảng danh sách. File cần có hàng tiêu đề với cột “PHÒNG” và “HỌ TÊN”.');
 }
 const idKey=v=>String(v||'').replace(/\D/g,'').replace(/^0+/,'');
-function planPeopleImport(rows,autoCreate=true){
+function planPeopleImport(rows){
   const byRoom={};rows.forEach(r=>(byRoom[r.room]=byRoom[r.room]||[]).push(r));
-  const plan={rooms:[],skipped:[],newRooms:0,vacantRooms:0,add:0,upd:0,dup:0,total:rows.length,mism:[],repMiss:[]};
+  const plan={rooms:[],skipped:[],add:0,upd:0,dup:0,total:rows.length,mism:[],repMiss:[]};
   Object.keys(byRoom).forEach(id=>{
-    const existingRoom=roomById(id);
-    if(!existingRoom&&!autoCreate){plan.skipped.push({id,n:byRoom[id].length,why:'chưa có phòng này trong app'});return}
-    if(existingRoom&&existingRoom.status!=='occupied'&&!autoCreate){plan.skipped.push({id,n:byRoom[id].length,why:'phòng đang để trống'});return}
-    const isNewRoom=!existingRoom;
-    const isVacant=!!existingRoom&&existingRoom.status!=='occupied';
-    if(isNewRoom)plan.newRooms++;
-    if(isVacant)plan.vacantRooms++;
-    const room=existingRoom||{id,type:/^KIOT/i.test(id)?'kiot':'phong',rentMode:'formula',base:1100000,fixed:0,trash:DB.settings.trash||0,internet:0,cable:0,anqp:DB.settings.anqp||0,occupants:byRoom[id].length||1,status:'occupied',tenant:{name:'',phone:'',idNo:'',moveIn:todayISO(),deposit:0,note:''},members:[]};
+    const room=roomById(id);
+    if(!room){plan.skipped.push({id,n:byRoom[id].length,why:'chưa có phòng này trong app'});return}
+    if(room.status!=='occupied'){plan.skipped.push({id,n:byRoom[id].length,why:'phòng đang để trống'});return}
     const mem=(room.members||[]),items=[];
-    const hasRep=!isNewRoom&&!isVacant&&room.tenant&&String(room.tenant.name||'').trim()!=='';
-    const cands=hasRep?[{t:room.tenant,tgt:'rep',id:idKey(room.tenant.idNo),name:room.tenant.name||''}].concat(mem.map((m,j)=>({t:m,tgt:j,id:idKey(m.idNo),name:m.name||''}))):[];
-    let needRep=!hasRep;
+    // Danh sách "ứng viên" đã có trong phòng: đại diện + từng người ở cùng. Người mới thêm trong lúc nhập cũng được đưa vào để dòng trùng trong file không bị thêm lần 2.
+    const cands=[{t:room.tenant,tgt:'rep',id:idKey(room.tenant.idNo),name:room.tenant.name||''}]
+      .concat(mem.map((m,j)=>({t:m,tgt:j,id:idKey(m.idNo),name:m.name||''})));
     byRoom[id].forEach(r=>{
       const rid=idKey(r.idNo),rn=normTxt(r.name);let c=null;
       if(rid)c=cands.find(x=>x.id===rid)||null;                       // 1. cùng CCCD là cùng một người
@@ -1554,35 +1448,22 @@ function planPeopleImport(rows,autoCreate=true){
         items.push({r,target:null,kind:'dup'});plan.dup++;return;
       }
       if(c){c.taken=true;if(rid&&!c.id)c.id=rid;items.push({r,target:c.tgt,kind:'upd',old:c.name||''});plan.upd++;return}
-      const role=needRep?'rep':'mem';
-      if(needRep)needRep=false;
-      const item={r:{...r},target:null,kind:'add',role};items.push(item);plan.add++;
+      const item={r:{...r},target:null,kind:'add'};items.push(item);plan.add++;
       cands.push({t:null,tgt:null,id:rid,name:r.name,virt:true,taken:true,item});
     });
-    if(hasRep&&cands[0]&&!cands[0].taken)plan.repMiss.push({id,name:room.tenant.name}); // đại diện không có trong file
-    const newMemCount=items.filter(x=>x.kind==='add'&&x.role==='mem').length;
-    const total=(hasRep?1:(items.some(x=>x.kind==='add'&&x.role==='rep')?1:0))+mem.length+newMemCount;
-    plan.rooms.push({id,room,isNewRoom,isVacant,items,newCount:items.filter(x=>x.kind==='add').length,total});
-    if(!isNewRoom&&total!==room.occupants)plan.mism.push({id,list:total,cur:room.occupants});
+    if(room.tenant.name&&!cands[0].taken)plan.repMiss.push({id,name:room.tenant.name}); // đại diện không có trong file
+    const newCount=items.filter(x=>x.kind==='add').length,total=1+mem.length+newCount;
+    plan.rooms.push({id,room,items,newCount,total});
+    if(total!==room.occupants)plan.mism.push({id,list:total,cur:room.occupants});
   });
   return plan;
 }
 function applyPeoplePlan(plan,opt){
-  plan.rooms.forEach(({room,isNewRoom,isVacant,items,total})=>{
-    if(isNewRoom&&!roomById(room.id))DB.rooms.push(room);
-    if(isNewRoom||isVacant)room.status='occupied';
+  plan.rooms.forEach(({room,items,total})=>{
     room.members=room.members||[];
-    items.forEach(({r,target,kind,role})=>{
+    items.forEach(({r,target,kind})=>{
       if(kind==='dup')return;
-      if(kind==='add'){
-        const pObj={name:toTitle(r.name),idNo:r.idNo,tt1:r.tt1,tt2:r.tt2,tv1:'',tv2:'',dob:r.dob,sex:r.sex,hk:r.hk,hkOwner:r.hkOwner,group:r.group,ttPlace:r.ttPlace,phone:r.phone,note:r.note};
-        if(role==='rep'){
-          room.tenant=Object.assign({},room.tenant,pObj,{moveIn:r.tt1||room.tenant.moveIn||todayISO(),deposit:room.tenant.deposit||0});
-        }else{
-          room.members.push(pObj);
-        }
-        return;
-      }
+      if(kind==='add'){room.members.push({name:toTitle(r.name),idNo:r.idNo,tt1:r.tt1,tt2:r.tt2,tv1:'',tv2:'',dob:r.dob,sex:r.sex,hk:r.hk,hkOwner:r.hkOwner,group:r.group,ttPlace:r.ttPlace,phone:r.phone,note:r.note});return}
       if(!opt.update)return;
       const t=target==='rep'?room.tenant:room.members[target];
       if(opt.name&&r.name){const nn=toTitle(r.name);if(nn)t.name=nn}   // họ tên đầy đủ (cả đại diện và người ở cùng)
@@ -1591,10 +1472,8 @@ function applyPeoplePlan(plan,opt){
       if(r.phone&&!t.phone)t.phone=r.phone;
       if(r.note&&!t.note)t.note=r.note;
     });
-    if((opt.occ||isNewRoom||isVacant)&&total>0)room.occupants=total;
+    if(opt.occ&&total>0)room.occupants=total;
   });
-  sortRooms();
-  syncRecs(UI.month);
 }
 /* ---------- Gộp người trùng (cùng phòng) ---------- */
 const MERGE_F=['name','idNo','dob','sex','hk','hkOwner','group','ttPlace','phone','tt1','tt2','tv1','tv2','note'];
@@ -1638,33 +1517,27 @@ function dupModal(){
 }
 async function importPeopleXLSX(file){
   let parsed;try{parsed=await parsePeopleXLSX(file)}catch(e){return toast(e.message||String(e),'bad')}
-  const renderImportModal=(autoCreate)=>{
-    const plan=planPeopleImport(parsed.rows,autoCreate);
-    const roomLines=plan.rooms.map(x=>`<li><b class="mono">${esc(x.id)}</b>${x.isNewRoom?' <span class="chip acc">phòng mới</span>':(x.isVacant?' <span class="chip ok">mở thuê</span>':'')} – ${x.items.filter(i=>i.kind!=='dup').map(i=>i.kind==='add'?`<span class="pos">+ ${esc(toTitle(i.r.name))}</span> (${i.role==='rep'?'đại diện':'mới'})`:`${esc(i.old||'(chưa tên)')}${i.old&&i.old.trim()!==toTitle(i.r.name)?' → <b>'+esc(toTitle(i.r.name))+'</b>':''} (cập nhật)`).join('; ')}</li>`).join('');
-    openModal('Nhập người ở từ Excel',`
-      <p style="margin:0 0 8px">Đọc được <b>${plan.total}</b> người từ bảng “${esc(parsed.sheet)}”: <b>${plan.add}</b> người mới, <b>${plan.upd}</b> người đã có trong app.${plan.newRooms?` Tự tạo <b>${plan.newRooms}</b> phòng mới.`:''}${plan.vacantRooms?` Chuyển <b>${plan.vacantRooms}</b> phòng trống sang Đang thuê.`:''}${plan.dup?` Có <b>${plan.dup}</b> dòng trùng trong file, đã tự gộp.`:''}</p>
-      <div class="mgr-sec">
-        <label class="row" style="gap:8px;flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" id="imCreate" ${autoCreate?'checked':''}><span><b>Tự động tạo phòng mới</b> và chuyển phòng trống sang <b>Đang thuê</b> nếu mã phòng trong Excel chưa có trên hệ thống (người đầu tiên của mỗi phòng làm đại diện phòng).</span></label>
-        <label class="row" style="gap:8px;flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" id="imUpd" checked><span>Cập nhật thông tin người đã có (ngày sinh, giới tính, thường trú, chủ hộ, nơi đăng ký tạm trú, ngày đăng ký và hạn tạm trú). Không đổi CCCD đang có.</span></label>
-        <label class="row" style="gap:8px;flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" id="imName" checked><span>Đổi tên đang nhập thành <b>họ tên đầy đủ trong file</b>, áp dụng cho cả đại diện phòng và người ở cùng.</span></label>
-        <label class="row" style="gap:8px;flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" id="imOcc" checked><span>Đặt “Số người ở mặc định” của phòng theo đúng số người trong danh sách${plan.mism.length?` (${plan.mism.length} phòng đang lệch: ${esc(plan.mism.slice(0,6).map(x=>`${x.id} ${x.cur}→${x.list}`).join(', '))}${plan.mism.length>6?'…':''})`:''}.</span></label></div>
-      ${plan.repMiss.length?`<p class="muted sm" style="margin:0 0 8px">Đại diện phòng không có trong file (giữ nguyên, kiểm tra lại tên): ${esc(plan.repMiss.map(x=>`${x.id} (${x.name})`).join('; '))}.</p>`:''}
-      ${plan.skipped.length?`<p class="muted sm" style="margin:0 0 8px">Bỏ qua ${plan.skipped.reduce((a,x)=>a+x.n,0)} người: ${esc(plan.skipped.map(x=>`${x.id} (${x.why})`).join('; '))}.</p>`:''}
-      <details class="help" open><summary>Xem theo phòng (${plan.rooms.length} phòng)</summary><ul class="list-plain" style="max-height:220px;overflow:auto">${roomLines||'<li class="muted sm">Không có phòng nào được nhập.</li>'}</ul></details>
-      <p class="muted sm" style="margin:8px 0 0">Dữ liệu sau khi nhập được lưu tự động lên Google Drive của bạn.</p>`,
-      `<button class="btn" data-act="mclose">Hủy</button><button class="btn primary" id="imGo" ${plan.rooms.length?'':'disabled'}>Nhập ${plan.add+plan.upd} người vào app</button>`,{wide:true});
-    $('#imCreate').onchange=()=>{const ac=$('#imCreate').checked;closeModal(true);renderImportModal(ac)};
-    $('#imGo').onclick=async()=>{
-      const opt={update:$('#imUpd').checked,name:$('#imName').checked,occ:$('#imOcc').checked};closeModal(true);
-      await snapshot('Trước khi nhập người ở từ Excel');
-      applyPeoplePlan(plan,opt);save();persistLocal();UI.view='people';CFG.view='people';saveCfg();render();
-      let where=' · đang lưu trong trình duyệt này (chưa kết nối Google Drive)';
-      if(Sync.driver&&Sync.state==='needauth')where=' · CHƯA lên được '+(DRIVER_NAME[CFG.driver]||'nơi lưu trữ')+' (cần đăng nhập lại), bấm “Cấp quyền / đăng nhập” trước khi tắt app';
-      if(Sync.driver&&Sync.state!=='needauth'){try{await Sync.push()}catch(e){}where=Sync.state==='idle'?' · đã lưu lên '+(DRIVER_NAME[CFG.driver]||'nơi lưu trữ'):' · chưa ghi được lên nơi lưu trữ, hãy kiểm tra kết nối'}
-      toast(`Đã nhập ${plan.add+plan.upd} người (${plan.add} mới, ${plan.upd} cập nhật${plan.newRooms?', tạo '+plan.newRooms+' phòng':''})${where}`,Sync.driver&&Sync.state==='error'?'bad':'');
-    };
+  const plan=planPeopleImport(parsed.rows);
+  const roomLines=plan.rooms.map(x=>`<li><b class="mono">${esc(x.id)}</b> – ${x.items.filter(i=>i.kind!=='dup').map(i=>i.kind==='add'?`<span class="pos">+ ${esc(toTitle(i.r.name))}</span> (mới)`:`${esc(i.old||'(chưa tên)')}${i.old&&i.old.trim()!==toTitle(i.r.name)?' → <b>'+esc(toTitle(i.r.name))+'</b>':''} (cập nhật)`).join('; ')}</li>`).join('');
+  openModal('Nhập người ở từ Excel',`
+    <p style="margin:0 0 8px">Đọc được <b>${plan.total}</b> người từ bảng “${esc(parsed.sheet)}”: <b>${plan.add}</b> người mới, <b>${plan.upd}</b> người đã có trong app (khớp theo CCCD hoặc tên trong cùng phòng).${plan.dup?` Có <b>${plan.dup}</b> dòng trùng trong file, đã tự gộp.`:''}</p>
+    <div class="mgr-sec"><label class="row" style="gap:8px;flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" id="imUpd" checked><span>Cập nhật thông tin người đã có (ngày sinh, giới tính, thường trú, chủ hộ, nơi đăng ký tạm trú, ngày đăng ký và hạn tạm trú). Cũng dùng để sửa các ngày đã nhập lệch 1 ngày ở bản cũ. Không đổi CCCD đang có.</span></label>
+      <label class="row" style="gap:8px;flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" id="imName" checked><span>Đổi tên đang nhập thành <b>họ tên đầy đủ trong file</b>, áp dụng cho cả đại diện phòng và người ở cùng (ví dụ “Hoành” → “Danh Hoành”). Tên đại diện cũng xuất hiện trên phiếu thu và lời nhắc, nên nếu muốn giữ tên gọi cũ thì bỏ chọn ô này.</span></label>
+      <label class="row" style="gap:8px;flex-wrap:nowrap;align-items:flex-start"><input type="checkbox" id="imOcc"><span>Đặt “Số người ở mặc định” của phòng theo số người trong danh sách${plan.mism.length?` (${plan.mism.length} phòng đang lệch: ${esc(plan.mism.slice(0,6).map(x=>`${x.id} ${x.cur}→${x.list}`).join(', '))}${plan.mism.length>6?'…':''})`:''}. Chỉ ảnh hưởng tiền phụ thu từ tháng tạo sau.</span></label></div>
+    ${plan.repMiss.length?`<p class="muted sm" style="margin:0 0 8px">Đại diện phòng không có trong file (giữ nguyên, kiểm tra lại tên): ${esc(plan.repMiss.map(x=>`${x.id} (${x.name})`).join('; '))}.</p>`:''}
+    ${plan.skipped.length?`<p class="muted sm" style="margin:0 0 8px">Bỏ qua ${plan.skipped.reduce((a,x)=>a+x.n,0)} người: ${esc(plan.skipped.map(x=>`${x.id} (${x.why})`).join('; '))}.</p>`:''}
+    <details class="help"><summary>Xem theo phòng (${plan.rooms.length} phòng)</summary><ul class="list-plain" style="max-height:220px;overflow:auto">${roomLines}</ul></details>
+    <p class="muted sm" style="margin:8px 0 0">File chỉ được đọc ngay trên máy bạn, không gửi đi đâu. Dữ liệu sau khi nhập được lưu vào cơ sở dữ liệu của app (Google Drive nếu đã kết nối) và có bản lưu tự động trước khi nhập.</p>`,
+    `<button class="btn" data-act="mclose">Hủy</button><button class="btn primary" id="imGo">Nhập vào app</button>`,{wide:true});
+  $('#imGo').onclick=async()=>{
+    const opt={update:$('#imUpd').checked,name:$('#imName').checked,occ:$('#imOcc').checked};closeModal(true);
+    await snapshot('Trước khi nhập người ở từ Excel');
+    applyPeoplePlan(plan,opt);save();persistLocal();UI.view='people';CFG.view='people';saveCfg();render();
+    let where=' · đang lưu trong trình duyệt này (chưa kết nối Google Drive)';
+    if(Sync.driver&&Sync.state==='needauth')where=' · CHƯA lên được '+(DRIVER_NAME[CFG.driver]||'nơi lưu trữ')+' (cần đăng nhập lại), bấm “Cấp quyền / đăng nhập” trước khi tắt app';
+    if(Sync.driver&&Sync.state!=='needauth'){try{await Sync.push()}catch(e){}where=Sync.state==='idle'?' · đã lưu lên '+(DRIVER_NAME[CFG.driver]||'nơi lưu trữ'):' · chưa ghi được lên nơi lưu trữ, hãy kiểm tra kết nối'}
+    toast(`Đã nhập ${plan.total} dòng (${opt.update?plan.add+' mới, '+plan.upd+' cập nhật':plan.add+' mới'}${plan.dup?', '+plan.dup+' trùng đã gộp':''})${where}`,Sync.driver&&Sync.state==='error'?'bad':'');
   };
-  renderImportModal(true);
 }
 async function peopleTemplate(){
   try{await ensureXLSX()}catch(e){return toast(e.message,'bad')}
@@ -1841,7 +1714,7 @@ function vRooms(){
     <div class="num right"><span class="cell-l">Tiền cọc</span>${r.tenant.deposit?money(r.tenant.deposit):'–'}</div>
     <div class="sm"><span class="cell-l">Tiền phòng</span>${ruleText(r)}</div><div class="num right"><span class="cell-l">Người</span>${r.status==='occupied'?r.occupants:'–'}</div>
     <div><span class="chip ${r.status==='occupied'?'ok':''}">${r.status==='occupied'?'Đang thuê':'Trống'}</span></div>
-    <div class="row full" style="gap:5px;justify-content:flex-end"><button class="btn sm" data-act="personadd" data-room="${esc(r.id)}" title="Thêm người thuê / người ở cùng vào phòng này">${icon('plus',14)}Khách</button><button class="btn sm" data-act="roomedit" data-room="${esc(r.id)}">${icon('edit',14)}Sửa</button>${r.status==='occupied'?`<button class="btn sm" data-act="moveout" data-room="${esc(r.id)}">Trả phòng</button>`:''}</div></div>`).join('');
+    <div class="row full" style="gap:5px;justify-content:flex-end"><button class="btn sm" data-act="roomedit" data-room="${esc(r.id)}">${icon('edit',14)}Sửa</button>${r.status==='occupied'?`<button class="btn sm" data-act="moveout" data-room="${esc(r.id)}">Trả phòng</button>`:''}</div></div>`).join('');
   const hist=DB.history.slice().reverse().map(h=>`<tr><td class="l"><b class="mono">${esc(h.roomId)}</b></td><td class="l">${esc(h.name)}${(h.members||[]).length?` <span class="muted sm">+ ${h.members.length} người ở cùng</span>`:''}</td><td>${fmtDate(h.moveIn)||'–'}</td><td>${fmtDate(h.moveOut)}</td><td class="num">${money(h.deposit)}</td><td class="num">${money(h.refund)}${h.settle&&h.settle.collect>0?`<div class="sm" style="color:var(--bad)">khách trả ${money(h.settle.collect)}</div>`:''}</td><td class="l">${esc(h.note||'')}${h.settle?`<div class="muted sm">Quyết toán ${esc(monthLabel(h.settle.month).toLowerCase())}: ${money(h.settle.total)}đ${h.settle.prorate?' ('+h.settle.days+'/'+h.settle.dim+' ngày)':''}</div>`:''}</td></tr>`).join('');
   return `<div class="tools"><span class="muted grow">${occ} phòng đang thuê · ${DB.rooms.length-occ} trống · tổng tiền cọc ${money(DB.rooms.reduce((a,r)=>a+(r.status==='occupied'?r.tenant.deposit||0:0),0))}đ</span><button class="btn primary" data-act="roomedit" data-room="">${icon('plus',16)}Thêm phòng</button></div>
   <div class="lst"><div class="lrow head room-g"><div>Phòng</div><div>Khách thuê</div><div>Ngày thuê</div><div class="right">Tiền cọc</div><div>Tiền phòng</div><div class="right">Người</div><div>Tình trạng</div><div></div></div>${rows}</div>
@@ -3085,7 +2958,6 @@ document.addEventListener('click',async e=>{
    case 'logout':authClear();try{GD.token=null;GD.exp=0;sessionStorage.removeItem('tientro.gd')}catch(e){}location.reload();break;
    case 'importjson':$('#fileJson').click();break;
    case 'exportxlsx':exportXLSX();break;
-   case 'personadd':personAddModal(id||'');break;
    case 'peopleimport':{const fi=$('#filePeople');if(fi)fi.click();break}
    case 'peopletpl':peopleTemplate();break;
    case 'policerep':policeModal();break;
